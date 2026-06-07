@@ -9,11 +9,14 @@ if __name__ == "__main__":
             file_open: typing.TextIO = open(sys.argv[1])
             print("---")
             print()
-            print(file_open.read())
-            print()
+            text_in_file: str = file_open.read()
+            print(text_in_file)
             print("---")
             file_open.close()
             print(f"File '{file_open.name}' closed.")
+            print()
+            print("Transform data:")
+            print("---")
         except FileNotFoundError as e:
             print(f"\033[31mError opening file '{sys.argv[1]}': {e}\033[0m")
         except PermissionError as e:
