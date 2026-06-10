@@ -17,11 +17,15 @@ if __name__ == "__main__":
             print()
             print("Transform data:")
             print("---")
+            i: int = 0
             for line in text_in_file:
                 if line != "\n":
                     print(line, end="")
                 else:
                     print("#")
+                i += 1
+            if text_in_file[i - 1] != "\n":
+                print("#")
         except FileNotFoundError as e:
             print(f"\033[31mError opening file '{sys.argv[1]}': {e}\033[0m")
         except PermissionError as e:
