@@ -34,12 +34,14 @@ if __name__ == "__main__":
             print("Transform data:")
             print("---")
             print()
-            new_text: str = 
+            new_text: str = "".join(convert_text(text_in_file))
             print(new_text)
             print()
             print("---")
             print()
-            saved_name: str = input("Enter new file name (or empty): ")
+            print("Enter new file name (or empty): ", end="")
+            sys.stdout.flush()
+            saved_name: str = sys.stdin.readline().rstrip("\n")
             if not saved_name:
                 print("Not saving data.")
             else:
@@ -49,8 +51,12 @@ if __name__ == "__main__":
                 file_to_save.close()
                 print(f"Data saved in file '{saved_name}'.")
         except FileNotFoundError as e:
-            print(f"\033[31mError opening file '{sys.argv[1]}': {e}\033[0m")
+            sys.stderr.write(
+                f"\033[31m[STDERR] Error opening file '{sys.argv[1]}': {e}\033[0m"
+            )
         except PermissionError as e:
-            print(f"\033[31mError opening file '{sys.argv[1]}': {e}\033[0m")
+            sys.stderr.write(
+                f"\033[31m[STDERR] Error opening file '{sys.argv[1]}': {e}\033[0m"
+            )
     else:
         print("\033[31mUsage: ft_ancient_text.py <file>\033[0m")
