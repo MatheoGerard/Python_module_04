@@ -1,6 +1,21 @@
 import sys
 import typing
 
+
+def convert_text(text: str) -> list[str]:
+    if not text:
+        return []
+    convert: list[str] = []
+    for line in text:
+        if line != "\n":
+            convert.append(line)
+        else:
+            convert.append("#\n")
+    if text[-1] != "\n":
+        convert.append("#")
+    return convert
+
+
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         print("=== Cyber Archives Recovery ===")
@@ -11,21 +26,28 @@ if __name__ == "__main__":
             print()
             text_in_file: str = file_open.read()
             print(text_in_file)
+            print()
             print("---")
             file_open.close()
             print(f"File '{file_open.name}' closed.")
             print()
             print("Transform data:")
             print("---")
-            i: int = 0
-            for line in text_in_file:
-                if line != "\n":
-                    print(line, end="")
-                else:
-                    print("#")
-                i += 1
-            if text_in_file[i - 1] != "\n":
-                print("#")
+            print()
+            new_text: str = "".join(convert_text(text_in_file))
+            print(new_text)
+            print()
+            print("---")
+            print()
+            saved_name: str = input("Enter new file name (or empty): ")
+            if not saved_name:
+                print("Not saving data.")
+            else:
+                print(f"Saving data to '{saved_name}'")
+                file_to_save: typing.TextIO = open(saved_name, "w")
+                file_to_save.write(new_text)
+                file_to_save.close()
+                print(f"Data saved in file '{saved_name}'.")
         except FileNotFoundError as e:
             print(f"\033[31mError opening file '{sys.argv[1]}': {e}\033[0m")
         except PermissionError as e:
