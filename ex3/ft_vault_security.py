@@ -32,15 +32,13 @@ if __name__ == "__main__":
     print(file_state)
     print()
     print("Using 'secure_archive' to read from an inaccessible file:")
-    file_state: tuple[bool, str] = secure_archive("/etc/master.passwd")
+    file_state = secure_archive("/etc/master.passwd")
     print(file_state)
     print()
     print("Using 'secure_archive' to read from a regular file:")
-    file_state: tuple[bool, str] = secure_archive("test.txt")
+    file_state = secure_archive("test.txt")
     print(file_state)
     print()
     print("Using 'secure_archive' to write previous content to a new file:")
-    file_state: tuple[bool, str] = secure_archive(
-        "test.txt", 0, "affiche moi ca stp"
-    )
+    file_state = secure_archive("test.txt", 0, "affiche moi ca stp")
     print(file_state)

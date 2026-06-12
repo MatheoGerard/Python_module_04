@@ -58,7 +58,8 @@ if __name__ == "__main__":
             )
         except Exception as e:
             sys.stderr.write(
-                f"\033[31m[STDERR] Error opening file '{sys.argv[1]}': {e}\033[0m"
+                "\033[31m[STDERR] Error opening file"
+                f" '{sys.argv[1]}': {e}\033[0m"
             )
         finally:
             if file_open:
