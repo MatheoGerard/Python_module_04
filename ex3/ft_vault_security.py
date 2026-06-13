@@ -3,23 +3,23 @@ def secure_archive(
 ) -> tuple[bool, str]:
     if mode == 1:
         try:
-            open(file_name)
+            content: str = ""
+            with open(file_name) as file:
+                content = file.read()
+            return (True, content)
         except FileNotFoundError as e:
             return (False, str(e))
         except PermissionError as e:
             return (False, str(e))
-        content: str = ""
-        with open(file_name) as file:
-            content = file.read()
-        return (True, content)
     elif mode == 2:
         try:
-            open(file_name, "w")
+            with open(file_name, "w") as file:
+                file.write(text_to_write)
+            return (True, "Content successfully written to file")
+        except FileNotFoundError as e:
+            return (False, str(e))
         except PermissionError as e:
             return (False, str(e))
-        with open(file_name, "w") as file:
-            file.write(text_to_write)
-        return (True, "Content successfully written to file")
     else:
         return (False, f"{mode} is not correct mode")
 
